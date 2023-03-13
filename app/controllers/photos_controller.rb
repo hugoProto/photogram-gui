@@ -51,6 +51,47 @@ class PhotosController < ApplicationController
 
    # render({ :template => "photo_templates/create.html.erb"})
 
-   redirect_to("/photos/" + a_new_photo.id.to_s)
+   next_url = "/photos/" + a_new_photo.id.to_s
+
+   redirect_to(next_url)
+  end
+
+  def update
+    # Parameters: {"query_image"=>"https://www.chicagobooth.edu/-/media/project/chicago-booth/why-booth/story-hub/new-stories-2022/november/chicago-booth-military-map.jpg?cx=0.51&cy=0.45&cw=940&ch=749&hash=127249BCE97FA9BD48608D0C6C809E27", "query_caption"=>"Chicago Booth", "query_owner_id"=>"117"}
+
+    the_id = params.fetch("modify_id")
+
+    matching_photos = Photo.where({ :id => the_id })
+
+    the_photo = matching_photos.at(0)
+
+    input_image = params.fetch("query_image")
+    input_caption = params.fetch("query_caption")
+
+    the_photo.image = input_image
+    the_photo.caption = input_caption
+    
+    the_photo.save
+
+    # render({ :template => "photo_templates/update.html.erb" })
+
+    next_url = "/photos/" + the_photo.id.to_s
+
+    redirect_to(next_url)
+  end
+
+  def comment_photo
+  photo_id = params.fetch("input_photo_id")
+    author_id = params.fetch("input_author_id")
+    comment_body = params.fetch("input_body")
+    comment_new = Comment.new
+
+    comment_new.photo_id = photo_id
+    comment_new.author_id = author_id
+    comment_new.body = comment_body
+    comment_new.save
+
+    photo_url = "/photos/" + photo_id.to_s
+    redirect_to(photo_url)
   end
 end

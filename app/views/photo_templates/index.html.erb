@@ -4,13 +4,17 @@
 
 <form action="/insert_photo">
   <label for="image_box">Image</label>
-  <input id="image_box" name="query_image">
+  <input id="image_box" type="text" name="query_image" placeholder="Enter a URL for the image...">
 
   <label for="caption_box">Caption</label>
-  <textarea id="caption_box" name="query_caption"></textarea>
+  <textarea id="caption_box" type="text" name="query_caption" placeholder="Enter a caption for the photo..."></textarea>
 
   <label for="owner_id_box">Owner ID</label>
-  <input id="owner_id_box" name="query_owner_id">
+  <input id="owner_id_box" type="text" name="query_owner_id" placeholder="Enter an ID of a User">
+
+  <label for="comemnt_box">Comment</label>
+  <input id="comment_box" type="text" name="query_comemnt" placeholder="Enter a comment">
+
 
   <button>Add photo</button>
 </form>
